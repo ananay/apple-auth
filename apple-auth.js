@@ -52,7 +52,6 @@ class AppleAuth {
                     + "&client_id=" + this._config.client_id
                     + "&redirect_uri=" + this._config.redirect_uri
                     + "&state=" + this._state
-                    + "&scope=profile"
         return url;
     }
 
