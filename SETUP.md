@@ -90,6 +90,6 @@ const auth = new AppleAuth(config, './config/AuthKey.p8');
 ```
 
 Methods:
-- ```auth.loginURL``` - Creates the Login URL that your users will use to login to
-- ```auth.accessToken``` - Gets the access token from the grant code received
-- ```auth.refreshToken``` - Gets the access token from a refresh token
+- ```auth.loginURL()``` - Creates the Login URL that your users will use to login to
+- ```auth.accessToken(grantCode)``` - Gets the access token from the grant code received
+- ```auth.refreshToken(refreshToken)``` - Gets the access token from a refresh token
