@@ -2,7 +2,7 @@
   "name": "apple-auth",
   "version": "0.0.1",
   "description": "Sign in with Apple for NodeJS",
-  "main": "apple-auth.js",
+  "main": "src/apple-auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
