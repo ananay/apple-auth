@@ -1,3 +1,10 @@
+# Table of contents
+- Apple Developer Account Configurations
+    - <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#create-a-new-app-id">Create a new App ID</a>
+    - <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#create-a-services-id">Create a services ID</a>
+    - <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#create-a-key">Create a key</a>
+- <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#configuring-the-library">Configuring the Library</a>
+
 # Apple Developer Account configurations
 
 ## Create a new App ID
