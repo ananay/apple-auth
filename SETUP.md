@@ -75,3 +75,20 @@ The ```redirect_uri``` is the return url you added in the developer portal
 
 The ```key_id``` is the identifier for the private key you generated
 ![image](https://user-images.githubusercontent.com/5569219/59019916-87544780-8866-11e9-94d8-f454741dcbc6.png)
+
+You can now save this as config.json in the config folder.
+
+# Usage
+
+Initialize it using the following code:
+```
+const fs = require('fs');
+const AppleAuth = require('apple-auth');
+const config = fs.readFileSync("./config/config");
+const auth = new AppleAuth(config, './config/AuthKey.p8');
+```
+
+Methods:
+- ```auth.loginURL``` - Creates the Login URL that your users will use to login to
+- ```auth.accessToken``` - Gets the access token from the grant code received
+- ```auth.refreshToken``` - Gets the access token from a refresh token
