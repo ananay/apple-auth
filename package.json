@@ -2,7 +2,7 @@
   "name": "apple-auth",
   "version": "0.0.1",
   "description": "Sign in with Apple for NodeJS",
-  "main": "index.js",
+  "main": "apple-auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,7 +19,12 @@
     "authentication"
   ],
   "author": "Ananay Arora <i@ananayarora.com> (https://ananayarora.com)",
-  "license": "ISC",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
   "bugs": {
     "url": "https://github.com/ananay/apple-auth/issues"
   },
