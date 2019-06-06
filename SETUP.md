@@ -4,6 +4,7 @@
     - <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#create-a-services-id">Create a services ID</a>
     - <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#create-a-key">Create a key</a>
 - <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#configuring-the-library">Configuring the Library</a>
+- <a href="https://github.com/ananay/apple-auth/blob/master/SETUP.md#usage">Usage</a>
 
 # Apple Developer Account configurations
 
