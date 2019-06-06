@@ -1,4 +1,4 @@
-<h1 align="center">Sign in with Apple 🍎 for NodeJS</h1>
+<h1 align="center">Sign in with Apple 🍎 for Node.js</h1>
 
 An easy-to-use Node.js library for Signing in with Apple!
 
