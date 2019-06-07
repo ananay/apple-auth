@@ -66,7 +66,7 @@ class AppleClientSecret {
     generate() {
         return new Promise (
             (resolve, reject) => {
-                fs.readFile(this._privateKeyLocation, (err, data) => {
+                fs.readFile(this._privateKeyLocation, (err, privateKey) => {
                     if (err) {
                         reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
                     }
