@@ -59,28 +59,32 @@ class AppleAuth {
      * Get the access token from the server
      * based on the grant code
      * @param {string} code 
-     * @returns {object} Access Token object
+     * @returns {Promise<object>} Access Token object
      */
     
-    async accessToken(code) {
+    accessToken(code) {
         return new Promise (
             (resolve, reject) => {
-                const payload = {
-                    grant_type: 'authorization_code',
-                    code,
-                    redirect_uri: this._config.redirect_uri,
-                    client_id: this._config.client_id,
-                    client_secret: this._tokenGenerator.generate(),
-                };
-                axios({
-                    method: 'POST',
-                    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-                    data: qs.stringify(payload),
-                    url: 'https://appleid.apple.com/auth/token'
-                }).then((response) => {
-                    resolve(response.data);
-                }).catch((response) => {
-                    reject(response);
+                this._tokenGenerator.generate().then((token) => {
+                    const payload = {
+                        grant_type: 'authorization_code',
+                        code,
+                        redirect_uri: this._config.redirect_uri,
+                        client_id: this._config.client_id,
+                        client_secret: token,
+                    };
+                    axios({
+                        method: 'POST',
+                        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                        data: qs.stringify(payload),
+                        url: 'https://appleid.apple.com/auth/token'
+                    }).then((response) => {
+                        resolve(response.data);
+                    }).catch((response) => {
+                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + response);
+                    });
+                }).catch((err) => {
+                    reject(err);
                 });
             }
         );
@@ -93,25 +97,29 @@ class AppleAuth {
      * @returns {object} Access Token object
      */
 
-    async refreshToken(refreshToken) {
+    refreshToken(refreshToken) {
         return new Promise (
             (resolve, reject) => {
-                const payload = {
-                    grant_type: 'refresh_token',
-                    refresh_token: refreshToken,
-                    redirect_uri: this._config.redirect_uri,
-                    client_id: this._config.client_id,
-                    client_secret: this._tokenGenerator.generate(),
-                };
-                axios({
-                    method: 'POST',
-                    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-                    data: qs.stringify(payload),
-                    url: 'https://appleid.apple.com/auth/token'
-                }).then((response) => {
-                    resolve(response.data);
-                }).catch((response) => {
-                    reject(response);
+                this._tokenGenerator.generate().then((token) => {
+                    const payload = {
+                        grant_type: 'refresh_token',
+                        refresh_token: refreshToken,
+                        redirect_uri: this._config.redirect_uri,
+                        client_id: this._config.client_id,
+                        client_secret: token,
+                    };
+                    axios({
+                        method: 'POST',
+                        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                        data: qs.stringify(payload),
+                        url: 'https://appleid.apple.com/auth/token'
+                    }).then((response) => {
+                        resolve(response.data);
+                    }).catch((err) => {
+                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + response);
+                    });
+                }).catch((err) => {
+                    reject(err);
                 });
             }
         );
