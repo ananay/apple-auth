@@ -12,7 +12,7 @@
 ![image](https://user-images.githubusercontent.com/5569219/59017558-6d643600-8861-11e9-927b-a4952b56f34e.png)
 
 You need to create this even if you don't have an iOS or a Mac app
-![image](https://user-images.githubusercontent.com/5569219/59017608-95539980-8861-11e9-9605-86c509cd7d68.png)
+![image](https://user-images.githubusercontent.com/5569219/59460984-f967f600-8e3d-11e9-926e-ef39aa1f8e48.png)
 
 Scroll down to "Capabilities", and find "Sign in with Apple" and check it.
 ![image](https://user-images.githubusercontent.com/5569219/59017720-dea3e900-8861-11e9-898e-f486c093edd8.png)
