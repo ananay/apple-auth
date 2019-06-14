@@ -23,7 +23,7 @@ I've created an example of how to use this library with Express! Check it out he
 
 https://github.com/ananay/apple-auth-example
 
-**Live on https://apple.ananay.dev**
+**Example live on https://apple.ananay.dev**
 
 ## Usage
 
