@@ -35,6 +35,13 @@ Methods:
 - ```auth.refreshToken(refreshToken)``` - Gets the access token from a refresh token
 
 
+## Example app
+
+I've created an example of how to use this library with Express! Check it out here:
+
+https://github.com/ananay/apple-auth-example
+
+
 ## Questions / Contributing
 
 Feel free to open issues and pull requests. If you would like to be one of the core creators of this library, please reach out to me at i@ananayarora.com or message me on twitter @ananayarora!
