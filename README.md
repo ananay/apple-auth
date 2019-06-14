@@ -1,8 +1,10 @@
 #  Sign in with Apple for Node.js
 
 <a href="https://twitter.com/intent/follow?screen_name=ananayarora"><img src="https://img.shields.io/twitter/follow/ananayarora.svg?label=Follow%20@ananayarora" alt="Follow @ananayarora"></img></a>
-<img src="https://img.shields.io/npm/dt/apple-auth.svg"></img>
-<img src="https://img.shields.io/npm/v/apple-auth.svg"></img>
+<a href="https://npmjs.com/package/apple-auth">
+  <img src="https://img.shields.io/npm/dt/apple-auth.svg"></img>
+  <img src="https://img.shields.io/npm/v/apple-auth.svg"></img>
+</a>
 </p>
 
 An easy-to-use Node.js library for Signing in with Apple!
