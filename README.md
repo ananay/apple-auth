@@ -11,6 +11,12 @@ An easy-to-use Node.js library for Signing in with Apple!
 
 Apple has starteed to issue access tokens and show the Sign in with Apple flow, but the access token is only reserved for future use. As of now, you cannot fetch any information from that access token but in the future it will be possible.
 
+**Check out the passport version of this library here:**
+
+https://github.com/ananay/passport-apple
+
+https://npmjs.com/package/passport-apple
+
 ## Setup
 
 Begin by installing the library:
@@ -41,7 +47,6 @@ Methods:
 - ```auth.loginURL()``` - Creates the Login URL that your users will use to login to
 - ```auth.accessToken(grantCode)``` - Gets the access token from the grant code received
 - ```auth.refreshToken(refreshToken)``` - Gets the access token from a refresh token
-
 
 ## Questions / Contributing
 
