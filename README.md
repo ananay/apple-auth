@@ -11,15 +11,29 @@ Apple has starteed to issue access tokens and show the Sign in with Apple flow, 
 
 Live example running on <a href="https://apple.exun.co">https://apple.exun.co</a>
 
-## Setup / Usage / Example
+## Setup
 
 Begin by installing the library:
 ```npm install apple-auth```
 
 The configurations for Sign in with Apple are quite extensive so I've made an extensive SETUP.md file that you can read
-https://github.com/ananay/apple-auth/blob/master/SETUP.md
+https://github.com/ananay/apple-auth/blob/master/SETUP.md'
 
-The setup, usage and example are all included here
+# Usage
+
+Initialize it using the following code:
+```
+const fs = require('fs');
+const AppleAuth = require('apple-auth');
+const config = fs.readFileSync("./config/config");
+const auth = new AppleAuth(config, './config/AuthKey.p8');
+```
+
+Methods:
+- ```auth.loginURL()``` - Creates the Login URL that your users will use to login to
+- ```auth.accessToken(grantCode)``` - Gets the access token from the grant code received
+- ```auth.refreshToken(refreshToken)``` - Gets the access token from a refresh token
+
 
 ## Questions / Contributing
 
