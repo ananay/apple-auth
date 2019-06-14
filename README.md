@@ -9,8 +9,6 @@ An easy-to-use Node.js library for Signing in with Apple!
 
 Apple has starteed to issue access tokens and show the Sign in with Apple flow, but the access token is only reserved for future use. As of now, you cannot fetch any information from that access token but in the future it will be possible.
 
-Live example running on <a href="https://apple.exun.co">https://apple.exun.co</a>
-
 ## Setup
 
 Begin by installing the library:
@@ -18,6 +16,14 @@ Begin by installing the library:
 
 The configurations for Sign in with Apple are quite extensive so I've made an extensive SETUP.md file that you can read
 https://github.com/ananay/apple-auth/blob/master/SETUP.md
+
+## Example
+
+I've created an example of how to use this library with Express! Check it out here:
+
+https://github.com/ananay/apple-auth-example
+
+**Live on https://apple.ananay.dev**
 
 ## Usage
 
@@ -33,13 +39,6 @@ Methods:
 - ```auth.loginURL()``` - Creates the Login URL that your users will use to login to
 - ```auth.accessToken(grantCode)``` - Gets the access token from the grant code received
 - ```auth.refreshToken(refreshToken)``` - Gets the access token from a refresh token
-
-
-## Example app
-
-I've created an example of how to use this library with Express! Check it out here:
-
-https://github.com/ananay/apple-auth-example
 
 
 ## Questions / Contributing
