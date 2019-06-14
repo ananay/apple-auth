@@ -19,7 +19,7 @@ Begin by installing the library:
 The configurations for Sign in with Apple are quite extensive so I've made an extensive SETUP.md file that you can read
 https://github.com/ananay/apple-auth/blob/master/SETUP.md'
 
-# Usage
+## Usage
 
 Initialize it using the following code:
 ```
