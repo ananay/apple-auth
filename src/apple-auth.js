@@ -20,7 +20,7 @@ class AppleAuth {
      *  found on top right corner of the developers page
      * @param {string} config.redirect_uri – The OAuth Redirect URI
      * @param {string} config.key_id – The identifier for the private key on the Apple
-     * @param {string} scope - the scope of information you want to get from the user (user name and email)
+     * @param {string} config.scope - the scope of information you want to get from the user (user name and email)
      *  Developer Account page
      * @param {string} privateKeyLocation - Location to the private key
      */
