@@ -58,9 +58,11 @@ Inside of config.json, paste the following sample:
     "client_id": "",
     "team_id": "",
     "redirect_uri": "",
-    "key_id": ""
+    "key_id": "",
+    "scope": ""
 }
 ```
+The ```scope```field is to set what information we want to gather from the user. We can set ```email``` and/or ```name```. This information is still not provided by Apple because this feature is still in Beta - but if you provide it the first time, when Apple finally releases it, your application will already have this permission provided. Otherwise the user has to revoke permissions to your application and log in again to be prompted for the new information request.
 
 The ```client_id``` is actually called the "Service ID" that you will create in the 'Identifiers' section
 
