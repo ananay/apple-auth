@@ -51,6 +51,7 @@ class AppleClientSecret {
                 }, (err, token) => {
                     if (err) {
                         reject("AppleAuth Error – Error occurred while signing: " + err);
+                        return;
                     }
                     resolve(token);
                 });
@@ -69,6 +70,7 @@ class AppleClientSecret {
                 fs.readFile(this._privateKeyLocation, (err, privateKey) => {
                     if (err) {
                         reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
+                        return;
                     }
                     let exp = Math.floor(Date.now() / 1000) + ( 86400 * 180 ); // Make it expire within 6 months
                     this._generateToken(
