@@ -67,27 +67,28 @@ class AppleClientSecret {
     generate() {
         return new Promise (
             (resolve, reject) => {
+                var that = this;
                 function generateToken() {
                     let exp = Math.floor(Date.now() / 1000) + ( 86400 * 180 ); // Make it expire within 6 months
-                    this._generateToken(
-                        this._config.client_id, 
-                        this._config.team_id, 
-                        this._privateKey,
-                        exp, 
-                        this._config.key_id
+                    that._generateToken(
+                        that._config.client_id,
+                        that._config.team_id,
+                        that._privateKey,
+                        exp,
+                        that._config.key_id
                     ).then((token) => {
                         resolve(token);
                     }).catch((err) => {
                         reject(err);
                     });
                 }
-                if (!this._privateKey) {
-                    fs.readFile(this._privateKeyLocation, (err, privateKey) => {
+                if (!that._privateKey) {
+                    fs.readFile(that._privateKeyLocation, (err, privateKey) => {
                         if (err) {
                             reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
                             return;
                         }
-                        this._privateKey = privateKey;
+                        that._privateKey = privateKey;
                         generateToken();
                     });
                 } else {
