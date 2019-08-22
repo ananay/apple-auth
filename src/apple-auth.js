@@ -49,11 +49,12 @@ class AppleAuth {
     loginURL() {
         this._state = crypto.randomBytes(5).toString('hex');
         const url = "https://appleid.apple.com/auth/authorize?"
-                    + "response_type=code"
+                    + "response_type=code%20id_token"
                     + "&client_id=" + this._config.client_id
                     + "&redirect_uri=" + this._config.redirect_uri
                     + "&state=" + this._state
                     + "&scope=" + this._config.scope
+	 	    + "&response_type=form_data"
         return url;
     }
 
