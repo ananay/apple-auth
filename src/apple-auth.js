@@ -54,7 +54,7 @@ class AppleAuth {
                     + "&redirect_uri=" + this._config.redirect_uri
                     + "&state=" + this._state
                     + "&scope=" + this._config.scope
-	 	    + "&response_type=form_data"
+	 	    + "&response_mode=form_post"
         return url;
     }
 
