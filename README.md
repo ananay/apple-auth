@@ -9,7 +9,9 @@
 
 An easy-to-use Node.js library for Signing in with Apple!
 
-Apple has starteed to issue access tokens and show the Sign in with Apple flow, but the access token is only reserved for future use. As of now, you cannot fetch any information from that access token but in the future it will be possible.
+Now with support for fetching the name and email!
+
+⚠️ Important note: Apple will only provide you with the name and email *ONCE* which is when the user taps "Sign in with Apple" on your app the first time. Keep in mind that you have to store this in your database at this time! For every login after that, Apple will provide you with a unique ID that you can use to lookup the username in your database.
 
 **Check out the passport version of this library here:**
 
