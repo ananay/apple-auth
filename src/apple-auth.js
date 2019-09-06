@@ -31,6 +31,7 @@ class AppleAuth {
         } else {
             this._config = JSON.parse(config);
         }
+        console.log(this._config);
         this._state = "";
         this._tokenGenerator = new AppleClientSecret(this._config, privateKeyLocation);
         this.loginURL = this.loginURL.bind(this);
