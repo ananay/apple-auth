@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
 class AppleClientSecret {
-    
+
     /**
      * 
      * @param {object} config 
@@ -16,15 +16,23 @@ class AppleClientSecret {
      * @param {string} config.team_id 
      * @param {string} config.redirect_uri 
      * @param {string} config.key_id 
-     * @param {*} privateKeyLocation 
+     * @param {string} privateKey
+     * @param {string} privateKeyMethod
      */
-    constructor(config, privateKeyLocation) {
+    constructor(config, privateKey, privateKeyMethod) {
         this._config = config;
-        this._privateKeyLocation = privateKeyLocation;
+        this._privateKey = privateKey;
+        if (typeof privateKeyMethod == 'undefined') {
+            this._privateKeyMethod = 'file';
+        } else if (privateKeyMethod == 'text' || privateKeyMethod == 'file') {
+            this._privateKeyMethod = privateKeyMethod;
+        } else {
+            this._privateKeyMethod = privateKeyMethod;
+        }
         this.generate = this.generate.bind(this);
         this._generateToken = this._generateToken.bind(this);
     }
-    
+
     /**
      * Generates the JWT token
      * @param {string} clientId 
@@ -34,7 +42,7 @@ class AppleClientSecret {
      * @returns {Promise<string>} token 
      */
     _generateToken(clientId, teamId, privateKey, exp, keyid) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 // Curate the claims
                 const claims = {
@@ -56,35 +64,50 @@ class AppleClientSecret {
                     resolve(token);
                 });
             }
-            );
-        }
-        
+        );
+    }
+
     /**
      * Reads the private key file calls 
      * the token generation method
      * @returns {Promise<string>} token - The generated client secret
      */
     generate() {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
-                fs.readFile(this._privateKeyLocation, (err, privateKey) => {
-                    if (err) {
-                        reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
-                        return;
-                    }
-                    let exp = Math.floor(Date.now() / 1000) + ( 86400 * 180 ); // Make it expire within 6 months
+                if (this._privateKeyMethod == 'file') {
+                    fs.readFile(this._privateKey, (err, privateKey) => {
+                        if (err) {
+                            reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
+                            return;
+                        }
+                        let exp = Math.floor(Date.now() / 1000) + (86400 * 180); // Make it expire within 6 months
+                        this._generateToken(
+                            this._config.client_id,
+                            this._config.team_id,
+                            privateKey,
+                            exp,
+                            this._config.key_id
+                        ).then((token) => {
+                            resolve(token);
+                        }).catch((err) => {
+                            reject(err);
+                        });
+                    });
+                } else {
+                    let exp = Math.floor(Date.now() / 1000) + (86400 * 180); // Make it expire within 6 months
                     this._generateToken(
-                        this._config.client_id, 
-                        this._config.team_id, 
-                        privateKey,
-                        exp, 
+                        this._config.client_id,
+                        this._config.team_id,
+                        this._privateKey,
+                        exp,
                         this._config.key_id
                     ).then((token) => {
                         resolve(token);
                     }).catch((err) => {
                         reject(err);
                     });
-                });
+                }
             }
         );
     }
