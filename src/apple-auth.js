@@ -22,10 +22,11 @@ class AppleAuth {
      * @param {string} config.key_id – The identifier for the private key on the Apple
      * @param {string} config.scope - the scope of information you want to get from the user (user name and email)
      *  Developer Account page
-     * @param {string} privateKeyLocation - Location to the private key
+     * @param {string} privateKeyLocation - Private Key Location / the key itself
+     * @param {string} privateKeyMethod - Private Key Method (can be either 'file' or 'text')
      */
 
-    constructor(config, privateKeyLocation) {
+    constructor(config, privateKey, privateKeyMethod) {
         if (typeof config == 'object') {
             if (Buffer.isBuffer(config)) {
                 this._config = JSON.parse(config.toString());
@@ -36,7 +37,7 @@ class AppleAuth {
             this._config = JSON.parse(config);
         }
         this._state = "";
-        this._tokenGenerator = new AppleClientSecret(this._config, privateKeyLocation);
+        this._tokenGenerator = new AppleClientSecret(this._config, privateKey, privateKeyMethod);
         this.loginURL = this.loginURL.bind(this);
     }
 
