@@ -26,7 +26,11 @@ class AppleAuth {
      */
 
     constructor(config, privateKeyLocation) {
-        this._config = JSON.parse(config);
+        if (typeof config == 'object') {
+            this._config = config;
+        } else {
+            this._config = JSON.parse(config);
+        }
         this._state = "";
         this._tokenGenerator = new AppleClientSecret(this._config, privateKeyLocation);
         this.loginURL = this.loginURL.bind(this);
