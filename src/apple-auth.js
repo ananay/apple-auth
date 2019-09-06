@@ -28,7 +28,7 @@ class AppleAuth {
     constructor(config, privateKeyLocation) {
         if (typeof config == 'object') {
             if (Buffer.isBuffer(config)) {
-                this._config = config.toString();
+                this._config = JSON.parse(config.toString());
             } else {
                 this._config = config;
             }
