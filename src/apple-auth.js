@@ -28,10 +28,8 @@ class AppleAuth {
     constructor(config, privateKeyLocation) {
         if (typeof config == 'object') {
             this._config = config;
-            console.log("Now testing with object");
         } else {
             this._config = JSON.parse(config);
-            console.log("Now testing with JSON");
         }
         this._state = "";
         this._tokenGenerator = new AppleClientSecret(this._config, privateKeyLocation);
