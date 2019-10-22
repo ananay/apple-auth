@@ -20,14 +20,24 @@ class AppleAuth {
      *  found on top right corner of the developers page
      * @param {string} config.redirect_uri – The OAuth Redirect URI
      * @param {string} config.key_id – The identifier for the private key on the Apple
+     * @param {string} config.scope - the scope of information you want to get from the user (user name and email)
      *  Developer Account page
-     * @param {string} privateKeyLocation - Location to the private key
+     * @param {string} privateKeyLocation - Private Key Location / the key itself
+     * @param {string} privateKeyMethod - Private Key Method (can be either 'file' or 'text')
      */
 
-    constructor(config, privateKeyLocation) {
-        this._config = JSON.parse(config);
+    constructor(config, privateKey, privateKeyMethod) {
+        if (typeof config == 'object') {
+            if (Buffer.isBuffer(config)) {
+                this._config = JSON.parse(config.toString());
+            } else {
+                this._config = config;
+            }
+        } else {
+            this._config = JSON.parse(config);
+        }
         this._state = "";
-        this._tokenGenerator = new AppleClientSecret(this._config, privateKeyLocation);
+        this._tokenGenerator = new AppleClientSecret(this._config, privateKey, privateKeyMethod);
         this.loginURL = this.loginURL.bind(this);
     }
 
@@ -48,10 +58,12 @@ class AppleAuth {
     loginURL() {
         this._state = crypto.randomBytes(5).toString('hex');
         const url = "https://appleid.apple.com/auth/authorize?"
-                    + "response_type=code"
+                    + "response_type=code%20id_token"
                     + "&client_id=" + this._config.client_id
                     + "&redirect_uri=" + this._config.redirect_uri
                     + "&state=" + this._state
+                    + "&scope=" + this._config.scope
+	 	    + "&response_mode=form_post"
         return url;
     }
 
@@ -116,7 +128,7 @@ class AppleAuth {
                     }).then((response) => {
                         resolve(response.data);
                     }).catch((err) => {
-                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + response);
+                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + err);
                     });
                 }).catch((err) => {
                     reject(err);

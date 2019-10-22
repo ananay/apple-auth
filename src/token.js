@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
 class AppleClientSecret {
-    
+
     /**
      * 
      * @param {object} config 
@@ -16,15 +16,23 @@ class AppleClientSecret {
      * @param {string} config.team_id 
      * @param {string} config.redirect_uri 
      * @param {string} config.key_id 
-     * @param {*} privateKeyLocation 
+     * @param {string} privateKeyLocation
+     * @param {string} privateKeyMethod
      */
-    constructor(config, privateKeyLocation) {
+    constructor(config, privateKeyLocation, privateKeyMethod) {
         this._config = config;
         this._privateKeyLocation = privateKeyLocation;
+        if (typeof privateKeyMethod == 'undefined') {
+            this._privateKeyMethod = 'file';
+        } else if (privateKeyMethod == 'text' || privateKeyMethod == 'file') {
+            this._privateKeyMethod = privateKeyMethod;
+        } else {
+            this._privateKeyMethod = privateKeyMethod;
+        }
         this.generate = this.generate.bind(this);
         this._generateToken = this._generateToken.bind(this);
     }
-    
+
     /**
      * Generates the JWT token
      * @param {string} clientId 
@@ -34,7 +42,7 @@ class AppleClientSecret {
      * @returns {Promise<string>} token 
      */
     _generateToken(clientId, teamId, privateKey, exp, keyid) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 // Curate the claims
                 const claims = {
@@ -56,16 +64,16 @@ class AppleClientSecret {
                     resolve(token);
                 });
             }
-            );
-        }
-        
+        );
+    }
+
     /**
      * Reads the private key file calls 
      * the token generation method
      * @returns {Promise<string>} token - The generated client secret
      */
     generate() {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 var that = this;
                 function generateToken() {
@@ -82,7 +90,7 @@ class AppleClientSecret {
                         reject(err);
                     });
                 }
-                if (!that._privateKey) {
+                if (!that._privateKey && that._privateKeyMethod == 'file') {
                     fs.readFile(that._privateKeyLocation, (err, privateKey) => {
                         if (err) {
                             reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
@@ -92,6 +100,7 @@ class AppleClientSecret {
                         generateToken();
                     });
                 } else {
+                    that._privateKey = that._privateKeyLocation;
                     process.nextTick(generateToken);
                 }
             }
