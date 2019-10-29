@@ -90,17 +90,21 @@ class AppleClientSecret {
                         reject(err);
                     });
                 }
-                if (!that._privateKey && that._privateKeyMethod == 'file') {
-                    fs.readFile(that._privateKeyLocation, (err, privateKey) => {
-                        if (err) {
-                            reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
-                            return;
-                        }
-                        that._privateKey = privateKey;
-                        generateToken();
-                    });
+                if (!that._privateKey) {
+                    if (that._privateKeyMethod == 'file') {
+                        fs.readFile(that._privateKeyLocation, (err, privateKey) => {
+                            if (err) {
+                                reject("AppleAuth Error - Couldn't read your Private Key file: " + err);
+                                return;
+                            }
+                            that._privateKey = privateKey;
+                            generateToken();
+                        });
+                    } else {
+                        that._privateKey = that._privateKeyLocation;
+                        process.nextTick(generateToken);
+                    }
                 } else {
-                    that._privateKey = that._privateKeyLocation;
                     process.nextTick(generateToken);
                 }
             }
