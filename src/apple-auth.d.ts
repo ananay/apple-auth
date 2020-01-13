@@ -4,6 +4,7 @@ declare module "apple-auth" {
     team_id: string;
     redirect_uri: string;
     key_id: string;
+    scope: string;
   }
   // https://developer.apple.com/documentation/signinwithapplerestapi/tokenresponse
   export interface AppleAuthAccessToken {
@@ -19,6 +20,7 @@ declare module "apple-auth" {
   }
   export default class AppleAuth {
     constructor(config: AppleAuthConfig, privateKeyLocation: string, privateKeyMethod: string)
+    public state: string;
     loginURL(): string;
     accessToken(code: string): Promise<AppleAuthAccessToken>;
     refreshToken(code: string): Promise<AppleAuthAccessToken>;
