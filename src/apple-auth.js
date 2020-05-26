@@ -138,4 +138,4 @@ class AppleAuth {
 
 }
 
-module.exports = { AppleAuth };
+module.exports = AppleAuth;
