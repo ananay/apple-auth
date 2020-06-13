@@ -63,4 +63,4 @@ Feel free to open issues and pull requests. If you would like to be one of the c
 
 
 #### ⚠️ Disclaimer
-This repository is NOT developed, endorsed by Apple Inc. or even related at all to Apple Inc. This library was implemented solely by the community's hardwork, and based on information that is public on Apple Developer's website. The library merely acts as a helper tool for anyone trying to implement Apple's Sign in with Apple.
+This repository is NOT developed, endorsed by Apple Inc. or even related at all to Apple Inc. This library was implemented solely by the community's hardwork, and based on information that is public on Apple Developer's website. The library is a helper library for anyone trying to implement Apple's Sign in with Apple.
