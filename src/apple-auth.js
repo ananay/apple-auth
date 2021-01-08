@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const qs = require('querystring');
 
 class AppleAuth {
-    
+
     /**
      * Configure the parameters of the Apple Auth class
      * @param {object} config - Configuration options
@@ -25,7 +25,6 @@ class AppleAuth {
      * @param {string} privateKeyLocation - Private Key Location / the key itself
      * @param {string} privateKeyMethod - Private Key Method (can be either 'file' or 'text')
      */
-
     constructor(config, privateKey, privateKeyMethod) {
         if (typeof config == 'object') {
             if (Buffer.isBuffer(config)) {
@@ -41,31 +40,32 @@ class AppleAuth {
         this.loginURL = this.loginURL.bind(this);
     }
 
+
     /**
      * Return the state for the OAuth 2 process
      * @returns {string} state – The state bytes in hex format
      */
-
-    get state () {
+    get state() {
         return this._state;
     }
+
 
     /**
      * Generates the Login URL
      * @returns {string} url – The Login URL
      */
-
     loginURL() {
         this._state = crypto.randomBytes(5).toString('hex');
         const url = "https://appleid.apple.com/auth/authorize?"
-                    + "response_type=code%20id_token"
-                    + "&client_id=" + this._config.client_id
-                    + "&redirect_uri=" + this._config.redirect_uri
-                    + "&state=" + this._state
-                    + "&scope=" + this._config.scope
-	 	    + "&response_mode=form_post"
+            + "response_type=code%20id_token"
+            + "&client_id=" + this._config.client_id
+            + "&redirect_uri=" + this._config.redirect_uri
+            + "&state=" + this._state
+            + "&scope=" + this._config.scope
+            + "&response_mode=form_post"
         return url;
     }
+
 
     /**
      * Get the access token from the server
@@ -73,9 +73,8 @@ class AppleAuth {
      * @param {string} code 
      * @returns {Promise<object>} Access Token object
      */
-    
     accessToken(code) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 this._tokenGenerator.generate().then((token) => {
                     const payload = {
@@ -102,15 +101,15 @@ class AppleAuth {
         );
     }
 
+
     /**
      * Get the access token from the server
      * based on the refresh token
      * @param {string} refreshToken 
      * @returns {object} Access Token object
      */
-
     refreshToken(refreshToken) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 this._tokenGenerator.generate().then((token) => {
                     const payload = {
