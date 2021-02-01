@@ -26,7 +26,7 @@ declare module "apple-auth" {
     error: "invalid_request" | "invalid_client" | "invalid_grant" | "unauthorized_client" | "unsupported_grant_type" | "invalid_scope";
   }
   export default class AppleAuth {
-    constructor(config: AppleAuthConfig, privateKeyLocation: string, privateKeyMethod: string)
+    constructor(config: AppleAuthConfig, privateKeyLocation: string, privateKeyMethod: 'file' | 'text')
     public _state: string;
     _tokenGenerator: AppleClientSecret;
     loginURL(): string;
