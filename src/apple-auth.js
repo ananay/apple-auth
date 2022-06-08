@@ -145,6 +145,7 @@
                          redirect_uri: this._config.redirect_uri,
                          client_id: this._config.client_id,
                          client_secret: token,
+                         token_type_hint:'access_token'
                      };
                      axios({
                          method: 'POST',
