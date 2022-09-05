@@ -11,7 +11,7 @@ An easy-to-use Node.js library for Signing in with Apple!
 
 Now with support for fetching the name and email!
 
-⚠️ Important note: Apple will only provide you with the name and email *ONCE* which is when the user taps "Sign in with Apple" on your app the first time. Keep in mind that you have to store this in your database at this time! For every login after that, Apple will provide you with a unique ID that you can use to lookup the username in your database.
+⚠️ Important note: Apple will only provide you with the name ONCE which is when the user taps "Sign in with Apple" on your app the first time. Keep in mind that you have to store this in your database at this time! For every login after that, Apple will provide you with a unique ID and the email that you can use to lookup the username in your database.
 
 **Check out the passport version of this library here:**
 
