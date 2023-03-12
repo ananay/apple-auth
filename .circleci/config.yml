@@ -13,10 +13,12 @@ jobs:
       - run:
           name: Download Apple Auth
           command: |
+            cd /home/circleci/project/apple-auth-example
             npm install git+https://github.com/ananay/apple-auth
       - run:
           name: Run node app
           command: |
+            cd /home/circleci/project/apple-auth-example
             node src/app.js 
 
 workflows:
