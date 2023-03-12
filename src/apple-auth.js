@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const qs = require('querystring');
 
 class AppleAuth {
-    
+
     /**
      * Configure the parameters of the Apple Auth class
      * @param {object} config - Configuration options
@@ -46,7 +46,7 @@ class AppleAuth {
      * @returns {string} state – The state bytes in hex format
      */
 
-    get state () {
+    get state() {
         return this._state;
     }
 
@@ -54,7 +54,6 @@ class AppleAuth {
      * Generates the Login URL
      * @returns {string} url – The Login URL
      */
-
     loginURL() {
         this._state = crypto.randomBytes(5).toString('hex');
         return "https://appleid.apple.com/auth/authorize?" + qs.stringify({
@@ -73,9 +72,9 @@ class AppleAuth {
      * @param {string} code 
      * @returns {Promise<object>} Access Token object
      */
-    
+
     accessToken(code) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 this._tokenGenerator.generate().then((token) => {
                     const payload = {
@@ -110,7 +109,7 @@ class AppleAuth {
      */
 
     refreshToken(refreshToken) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 this._tokenGenerator.generate().then((token) => {
                     const payload = {
