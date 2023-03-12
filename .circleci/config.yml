@@ -5,14 +5,19 @@ jobs:
     docker:
       - image: circleci/node:12.16.1-browsers
     steps:
-      - checkout
-      - run: npm install
       - run:
-          name: Add pull request as dependency
+          name: Download Apple Auth Example
           command: |
             git clone https://github.com/ananay/apple-auth-example.git
             cd apple-auth-example
+      - run:
+          name: Download Apple Auth
+          command: |
             npm install git+https://github.com/ananay/apple-auth
+      - run:
+          name: Run node app
+          command: |
+            node src/app.js 
 
 workflows:
   version: 2
