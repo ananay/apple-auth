@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const qs = require('querystring');
 
 class AppleAuth {
-    
+
     /**
      * Configure the parameters of the Apple Auth class
      * @param {object} config - Configuration options
@@ -46,7 +46,7 @@ class AppleAuth {
      * @returns {string} state – The state bytes in hex format
      */
 
-    get state () {
+    get state() {
         return this._state;
     }
 
@@ -73,9 +73,9 @@ class AppleAuth {
      * @param {string} code 
      * @returns {Promise<object>} Access Token object
      */
-    
+
     accessToken(code) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 this._tokenGenerator.generate().then((token) => {
                     const payload = {
@@ -110,7 +110,7 @@ class AppleAuth {
      */
 
     refreshToken(refreshToken) {
-        return new Promise (
+        return new Promise(
             (resolve, reject) => {
                 this._tokenGenerator.generate().then((token) => {
                     const payload = {
@@ -125,6 +125,33 @@ class AppleAuth {
                         headers: { 'content-type': 'application/x-www-form-urlencoded' },
                         data: qs.stringify(payload),
                         url: 'https://appleid.apple.com/auth/token'
+                    }).then((response) => {
+                        resolve(response.data);
+                    }).catch((err) => {
+                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + err);
+                    });
+                }).catch((err) => {
+                    reject(err);
+                });
+            }
+        );
+    }
+    revokeToken(unique_id) {
+        return new Promise(
+            (resolve, reject) => {
+                this._tokenGenerator.generate().then((token) => {
+                    const payload = {
+                        token: unique_id,
+                        redirect_uri: this._config.redirect_uri,
+                        client_id: this._config.client_id,
+                        client_secret: token,
+                        token_type_hint: 'access_token'
+                    };
+                    axios({
+                        method: 'POST',
+                        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                        data: qs.stringify(payload),
+                        url: 'https://appleid.apple.com/auth/revoke'
                     }).then((response) => {
                         resolve(response.data);
                     }).catch((err) => {

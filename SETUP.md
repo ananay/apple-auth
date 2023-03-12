@@ -33,8 +33,6 @@ Now, you need to verify this domain and in order to do that, click on the Servic
 
 ![image](https://user-images.githubusercontent.com/5569219/59018636-f54b3f80-8863-11e9-919e-be685f171f95.png)
 
-Hit download, and upload it to the root directory of your website. Once that is done, visit https://yourwebsite.com/.well-known/apple-developer-domain-association.txt and see if it actually works. Once that is done you can hit verify and you're good to go.
-
 ## Create a key
 
 Go to the "Keys" section in your Developer account and create one like this:

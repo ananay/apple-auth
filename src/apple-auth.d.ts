@@ -32,5 +32,6 @@ declare module "apple-auth" {
     loginURL(): string;
     accessToken(code: string): Promise<AppleAuthAccessToken>;
     refreshToken(code: string): Promise<AppleAuthAccessToken>;
+    revokeToken(unique_id: string): Promise<AppleAuthAccessToken>;
   }
 }
