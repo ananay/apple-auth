@@ -12,10 +12,7 @@ jobs:
           command: |
             git clone https://github.com/ananay/apple-auth-example.git
             cd apple-auth-example
-            git fetch origin pull/${CIRCLE_PULL_REQUEST##*/}/head:pr-${CIRCLE_PULL_REQUEST##*/}
-            git checkout pr-${CIRCLE_PULL_REQUEST##*/}
-            npm install
-            npm link ../
+            npm install git+https://github.com/ananay/apple-auth
 
 workflows:
   version: 2
