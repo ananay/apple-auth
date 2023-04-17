@@ -77,3 +77,17 @@ The ```key_id``` is the identifier for the private key you generated
 ![image](https://user-images.githubusercontent.com/5569219/59019916-87544780-8866-11e9-94d8-f454741dcbc6.png)
 
 You can now save this as config.json in the config folder.
+
+# Customizing the library
+When building this project, it may be useful to enable a debugging mode. Enabling this mode will log all failed requests to the console, and the reject error message will also contain more specific information about the error. To enable this mode, pass in an object with the key ```debug``` set to ```true```  when initializing the library. For example:
+```
+let auth = new AppleAuth(
+  config,
+  SECRET_KEY,
+  TEXT_METHOD,
+  {
+    debug: true
+  }
+);
+```
+

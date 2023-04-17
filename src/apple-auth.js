@@ -24,9 +24,11 @@ class AppleAuth {
      *  Developer Account page
      * @param {string} privateKeyLocation - Private Key Location / the key itself
      * @param {string} privateKeyMethod - Private Key Method (can be either 'file' or 'text')
+     * @param {object} customConfig - Custom Configuration options
+     * @param {boolean} customConfig.debug - Enable debug mode. This will print the verbose error messages returned by Apple's servers
      */
 
-    constructor(config, privateKey, privateKeyMethod) {
+    constructor(config, privateKey, privateKeyMethod, customConfig) {
         if (typeof config == 'object') {
             if (Buffer.isBuffer(config)) {
                 this._config = JSON.parse(config.toString());
@@ -35,6 +37,15 @@ class AppleAuth {
             }
         } else {
             this._config = JSON.parse(config);
+        }
+        if (typeof customConfig == 'object') {
+            if (Buffer.isBuffer(customConfig)) {
+                this._customConfig = JSON.parse(customConfig.toString());
+            } else {
+                this._customConfig = customConfig;
+            }
+        } else {
+            this._customConfig = JSON.parse(customConfig);
         }
         this._state = "";
         this._tokenGenerator = new AppleClientSecret(this._config, privateKey, privateKeyMethod);
@@ -92,8 +103,12 @@ class AppleAuth {
                         url: 'https://appleid.apple.com/auth/token'
                     }).then((response) => {
                         resolve(response.data);
-                    }).catch((response) => {
-                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + response);
+                    }).catch((error) => {
+                        if (this._customConfig?.debug) {
+                            console.error(response);
+                            reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + error + " - " + error?.response?.data?.error_description);
+                        }
+                        reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + error);
                     });
                 }).catch((err) => {
                     reject(err);
@@ -128,6 +143,10 @@ class AppleAuth {
                     }).then((response) => {
                         resolve(response.data);
                     }).catch((err) => {
+                        if(this._customConfig?.debug) {
+                            console.error(response);
+                            reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + err + " - " + err?.response?.data?.error_description);
+                        }
                         reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + err);
                     });
                 }).catch((err) => {
@@ -155,6 +174,10 @@ class AppleAuth {
                     }).then((response) => {
                         resolve(response.data);
                     }).catch((err) => {
+                        if(this._customConfig?.debug) {
+                            console.error(response);
+                            reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + err + " - " + err?.response?.data?.error_description);
+                        }
                         reject("AppleAuth Error - An error occurred while getting response from Apple's servers: " + err);
                     });
                 }).catch((err) => {
