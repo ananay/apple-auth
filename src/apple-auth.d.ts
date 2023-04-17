@@ -26,7 +26,7 @@ declare module "apple-auth" {
     error: "invalid_request" | "invalid_client" | "invalid_grant" | "unauthorized_client" | "unsupported_grant_type" | "invalid_scope";
   }
   export interface CustomConfig {
-    debug: boolean;
+    debug: boolean | undefined;
   }
   export default class AppleAuth {
     constructor(config: AppleAuthConfig, privateKeyLocation: string, privateKeyMethod: string, customConfig?: CustomConfig)
