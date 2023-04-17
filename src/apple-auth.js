@@ -28,7 +28,7 @@ class AppleAuth {
      * @param {boolean} customConfig.debug - Enable debug mode. This will print the verbose error messages returned by Apple's servers
      */
 
-    constructor(config, privateKey, privateKeyMethod, customConfig) {
+    constructor(config, privateKey, privateKeyMethod, customConfig = {}) {
         if (typeof config == 'object') {
             if (Buffer.isBuffer(config)) {
                 this._config = JSON.parse(config.toString());
