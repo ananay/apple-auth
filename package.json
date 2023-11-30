@@ -1,6 +1,6 @@
 {
   "name": "apple-auth",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Sign in with Apple for NodeJS",
   "main": "src/apple-auth.js",
   "types": "src/apple-auth.d.ts",
@@ -23,7 +23,7 @@
   "author": "Ananay Arora <i@ananayarora.com> (https://ananayarora.com)",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^9.0.0"
   },
